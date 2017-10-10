@@ -18,6 +18,13 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 public class CharacterSheetActivity extends AppCompatActivity {
 
     /**
@@ -57,6 +64,14 @@ public class CharacterSheetActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Invite Party Members?", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+
+        FloatingActionButton launchSearchButton = (FloatingActionButton) findViewById(R.id.searchSpells);
+        launchSearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSearchRequested();
             }
         });
 
@@ -114,7 +129,7 @@ public class CharacterSheetActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_character_sheet, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            TextView textView = rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }

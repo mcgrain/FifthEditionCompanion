@@ -2,4 +2,7 @@
     <string name="app_name">Fifth Edition Companion</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="app_label">Spell Search</string>
+    <string name="search_hint">Acid Arrow</string>
+    <string name="empty_search_result">No Results Found</string>
 </resources>
