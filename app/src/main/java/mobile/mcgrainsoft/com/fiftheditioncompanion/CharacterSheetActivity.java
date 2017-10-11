@@ -1,8 +1,12 @@
 package mobile.mcgrainsoft.com.fiftheditioncompanion;
 
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -16,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.TextView;
 
 public class CharacterSheetActivity extends AppCompatActivity {
@@ -29,6 +34,8 @@ public class CharacterSheetActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    private boolean favorite = true;
+    private Menu favMenu;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -67,7 +74,26 @@ public class CharacterSheetActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_character_sheet, menu);
-        return true;
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        MenuItemCompat.OnActionExpandListener expandListener = new MenuItemCompat.OnActionExpandListener() {
+            // Listener for Search Button
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                
+                return false;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                return false;
+            }
+        } ;
+
+        MenuItemCompat.setOnActionExpandListener(searchItem, expandListener);
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -75,14 +101,24 @@ public class CharacterSheetActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            //noinspection SimplifiableIfStatement
+            case R.id.action_settings:
+                return true;
+            case R.id.action_favorite:
+
+                if (favorite){
+                    Drawable notFave = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_48dp);
+
+                }
+
+                Drawable fave = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_black_48dp);
+                // mark current item as favorite
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     /**

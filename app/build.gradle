@@ -5,7 +5,7 @@ android {
     buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "mobile.mcgrainsoft.com.fiftheditioncompanion"
-        minSdkVersion 22
+        minSdkVersion 24
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
